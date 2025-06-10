@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Sharer {
+  id           String    @id
+  name         String
+  email        String    @unique
+  passwordHash String    @map("password_hash")
+  createdAt    DateTime  @map("created_at")
+  updatedAt    DateTime? @map("updated_at")
+
+  links Link[]
+
+  @@map("sharers")
+}
+
+model Link {
+  id          String    @id
+  code        String
+  title       String
+  url         String
+  accessCount Int       @map("access_count")
+  createdAt   DateTime  @map("created_at")
+  updatedAt   DateTime? @map("updated_at")
+
+  sharer   Sharer @relation(fields: [sharerId], references: [id])
+  sharerId String @map("sharer_id")
+}

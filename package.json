@@ -2,22 +2,24 @@
   "name": "ddd",
   "version": "1.0.0",
   "scripts": {
-    "dev": "tsx watch --env-file=.env src/http/server.ts",
+    "dev": "tsx watch --env-file=.env src/infra/server.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "biome check",
     "lint:fix": "biome check --write"
   },
   "dependencies": {
+    "@prisma/client": "^6.9.0",
     "bcryptjs": "^3.0.2",
     "fastify": "^5.3.3",
-    "fastify-type-provider-zod": "^5.0.1",
+    "fastify-type-provider-zod": "4.0.2",
     "zod": "^3.25.57"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@faker-js/faker": "^9.8.0",
     "@types/node": "^22.15.29",
+    "prisma": "^6.9.0",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3",
     "vite-tsconfig-paths": "^5.1.4",
