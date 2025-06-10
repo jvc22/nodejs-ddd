@@ -1,0 +1,14 @@
+services:
+  shortener-pg:
+    image: bitnami/postgresql:latest
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=shortener
+    volumes:
+      - shortener-data:/bitnami/postgresql
+
+volumes:
+  shortener-data:
