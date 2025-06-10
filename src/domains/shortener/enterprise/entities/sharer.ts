@@ -8,7 +8,7 @@ export interface SharerProps {
   email: string
   passwordHash: Password
   createdAt: Date
-  updatedAt?: Date
+  updatedAt?: Date | null
 }
 
 export class Sharer extends BaseEntity<SharerProps> {

@@ -9,7 +9,7 @@ export interface LinkProps {
   url: string
   accessCount: number
   createdAt: Date
-  updatedAt?: Date
+  updatedAt?: Date | null
   sharerId: UniqueEntityId
 }
 
