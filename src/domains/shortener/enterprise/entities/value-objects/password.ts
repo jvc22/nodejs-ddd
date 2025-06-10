@@ -22,4 +22,8 @@ export class Password {
 
     return doPasswordsMatch
   }
+
+  get hash() {
+    return this.value
+  }
 }
