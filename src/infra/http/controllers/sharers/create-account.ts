@@ -4,7 +4,7 @@ import { makeCreateAccountUseCase } from '../../factories/make-create-account-us
 
 export const createAccount: FastifyPluginAsyncZod = async app => {
   app.post(
-    '/sharers',
+    '/sign-up',
     {
       schema: {
         body: z.object({
