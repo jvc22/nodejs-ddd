@@ -1,4 +1,5 @@
 import type { FastifyInstance } from 'fastify'
+import { accessLink } from './access-link'
 import { deleteLink } from './delete-link'
 import { editLink } from './edit-link'
 import { fetchRecentLinks } from './fetch-recent-links'
@@ -11,4 +12,5 @@ export async function linksRoutes(app: FastifyInstance) {
   fetchRecentLinks(app, {})
   editLink(app, {})
   deleteLink(app, {})
+  accessLink(app, {})
 }

@@ -21,6 +21,20 @@ export class PrismaLinksRepository implements LinksRepository {
     return PrismaLinkMapper.toDomain(link)
   }
 
+  async findByCode(code: string) {
+    const link = await this.prisma.link.findFirst({
+      where: {
+        code,
+      },
+    })
+
+    if (!link) {
+      return null
+    }
+
+    return PrismaLinkMapper.toDomain(link)
+  }
+
   async findManyBySharerId(sharerId: string, params: PaginationParams) {
     const links = await this.prisma.link.findMany({
       where: {
