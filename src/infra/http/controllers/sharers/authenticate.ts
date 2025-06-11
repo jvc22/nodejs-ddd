@@ -4,7 +4,7 @@ import { makeAuthenticateUseCase } from '../../factories/make-authenticate-use-c
 
 export const authenticate: FastifyPluginAsyncZod = async app => {
   app.post(
-    '/sessions',
+    '/sign-in',
     {
       schema: {
         body: z.object({
