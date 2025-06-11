@@ -2,15 +2,15 @@ import { makeLink } from 'test/factories/make-link'
 import { InMemoryLinksRepository } from 'test/repositories/in-memory-links-repository'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
-import { GetLinkDetails } from './get-link-details'
+import { GetLinkDetailsUseCase } from './get-link-details'
 
 let linksRepository: InMemoryLinksRepository
-let sut: GetLinkDetails
+let sut: GetLinkDetailsUseCase
 
 describe('Get Link Details Use Case', () => {
   beforeEach(() => {
     linksRepository = new InMemoryLinksRepository()
-    sut = new GetLinkDetails(linksRepository)
+    sut = new GetLinkDetailsUseCase(linksRepository)
   })
 
   it('should retrieve link data', async () => {
