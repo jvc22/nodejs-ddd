@@ -15,6 +15,16 @@ export class InMemoryLinksRepository implements LinksRepository {
     return link
   }
 
+  async findByCode(code: string) {
+    const link = this.items.find(item => item.code.value === code)
+
+    if (!link) {
+      return null
+    }
+
+    return link
+  }
+
   async findManyBySharerId(sharerId: string, params: PaginationParams) {
     const links = this.items
       .filter(item => item.sharerId.toString() === sharerId)

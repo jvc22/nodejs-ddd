@@ -3,6 +3,7 @@ import type { Link } from '../../enterprise/entities/link'
 
 export interface LinksRepository {
   findById(id: string): Promise<Link | null>
+  findByCode(code: string): Promise<Link | null>
   findManyBySharerId(
     sharerId: string,
     params: PaginationParams

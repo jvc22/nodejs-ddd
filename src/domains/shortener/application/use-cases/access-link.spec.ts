@@ -19,12 +19,12 @@ describe('Access Link Use Case', () => {
 
     for (let i = 0; i < 6; i++) {
       await sut.execute({
-        linkId: createdLink.id.toString(),
+        code: createdLink.code.value,
       })
     }
 
     const result = await sut.execute({
-      linkId: createdLink.id.toString(),
+      code: createdLink.code.value,
     })
 
     expect(result.isSuccess()).toBe(true)
@@ -35,7 +35,7 @@ describe('Access Link Use Case', () => {
   })
 
   it('should not access link with wrong id', async () => {
-    const result = await sut.execute({ linkId: 'non-existing-id' })
+    const result = await sut.execute({ code: 'non-existing-code' })
 
     expect(result.isFailure()).toBe(true)
     expect(result.value).toBeInstanceOf(ResourceNotFoundError)

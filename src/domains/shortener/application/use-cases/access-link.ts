@@ -4,7 +4,7 @@ import type { LinksRepository } from '../repositories/links-repository'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 type AccessLinkUseCaseRequest = {
-  linkId: string
+  code: string
 }
 
 type AccessLinkUseCaseResponse = Either<
@@ -18,9 +18,9 @@ export class AccessLinkUseCase {
   constructor(private linksRepository: LinksRepository) {}
 
   async execute({
-    linkId,
+    code,
   }: AccessLinkUseCaseRequest): Promise<AccessLinkUseCaseResponse> {
-    const link = await this.linksRepository.findById(linkId)
+    const link = await this.linksRepository.findByCode(code)
 
     if (!link) {
       return failure(new ResourceNotFoundError())
