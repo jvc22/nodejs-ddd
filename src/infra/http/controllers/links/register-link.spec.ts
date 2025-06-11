@@ -25,5 +25,6 @@ describe('Register Link (E2E)', () => {
       })
 
     expect(response.statusCode).toBe(201)
+    expect(response.body).toHaveProperty('link')
   })
 })

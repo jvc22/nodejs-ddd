@@ -2,6 +2,7 @@ import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 import { makeRegisterLinkUseCase } from '../../factories/make-register-link-use-case'
 import { verifyJwt } from '../../middlewares/verify-jwt'
+import { type LinkHTTP, LinkPresenter } from '../../presenters/link-presenter'
 
 export const registerLink: FastifyPluginAsyncZod = async app => {
   app.post(
@@ -14,7 +15,9 @@ export const registerLink: FastifyPluginAsyncZod = async app => {
           url: z.string().url(),
         }),
         response: {
-          200: z.null(),
+          200: z.object({
+            link: z.custom<LinkHTTP>(),
+          }),
         },
       },
     },
@@ -30,7 +33,9 @@ export const registerLink: FastifyPluginAsyncZod = async app => {
       })
 
       if (result.isSuccess()) {
-        return reply.status(201).send()
+        return reply
+          .status(201)
+          .send({ link: LinkPresenter.toHTTP(result.value.link) })
       }
     }
   )
