@@ -6,6 +6,7 @@ import {
   validatorCompiler,
 } from 'fastify-type-provider-zod'
 import { env } from './env'
+import { linksRoutes } from './http/controllers/links/_routes'
 import { sharersRoutes } from './http/controllers/sharers/_routes'
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
@@ -21,3 +22,4 @@ app.register(fastifyJwt, {
 })
 
 app.register(sharersRoutes)
+app.register(linksRoutes)
