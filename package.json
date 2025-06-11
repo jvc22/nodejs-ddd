@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "tsx watch --env-file=.env src/infra/server.ts",
-    "test": "vitest run",
-    "test:watch": "vitest",
+    "test:unit": "vitest run --project unit",
+    "test:unit:watch": "vitest --project unit",
+    "test:e2e": "vitest run --project e2e",
+    "test:e2e:watch": "vitest --project e2e",
     "lint": "biome check",
     "lint:fix": "biome check --write"
   },
