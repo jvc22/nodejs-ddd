@@ -12,6 +12,12 @@ export const createAccount: FastifyPluginAsyncZod = async app => {
           email: z.string().email(),
           password: z.string(),
         }),
+        response: {
+          201: z.null(),
+          409: z.object({
+            message: z.string(),
+          }),
+        },
       },
     },
     async (request, reply) => {
