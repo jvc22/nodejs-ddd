@@ -13,15 +13,13 @@ describe('Edit Profile (E2E)', () => {
   })
 
   it('should edit a sharer profile', async () => {
-    const newName = 'John Doe'
-
     const { token } = await createAndAuthenticateSharer(app)
 
     const response = await request(app.server)
       .get('/sharers')
       .set('Authorization', `Bearer ${token}`)
       .send({
-        newName,
+        newName: 'John Doe',
       })
 
     expect(response.statusCode).toBe(200)
