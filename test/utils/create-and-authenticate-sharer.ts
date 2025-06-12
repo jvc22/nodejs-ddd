@@ -21,7 +21,7 @@ export async function createAndAuthenticateSharer(app: FastifyInstance) {
   const { token } = response.body
 
   return {
-    token,
+    token: String(token),
     data: {
       name,
       email,
