@@ -23,6 +23,7 @@ export class PrismaSharerMapper {
       name: sharer.name,
       email: sharer.email,
       passwordHash: sharer.passwordHash.hash,
+      totalAccessCount: sharer.totalAccessCount,
       createdAt: sharer.createdAt,
       updatedAt: sharer.updatedAt,
     }

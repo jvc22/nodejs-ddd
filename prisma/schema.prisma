@@ -9,12 +9,13 @@ datasource db {
 }
 
 model Sharer {
-  id           String    @id
-  name         String
-  email        String    @unique
-  passwordHash String    @map("password_hash")
-  createdAt    DateTime  @map("created_at")
-  updatedAt    DateTime? @map("updated_at")
+  id               String    @id
+  name             String
+  email            String    @unique
+  passwordHash     String    @map("password_hash")
+  totalAccessCount Int       @map("total_access_count")
+  createdAt        DateTime  @map("created_at")
+  updatedAt        DateTime? @map("updated_at")
 
   links Link[]
 
