@@ -1,0 +1,15 @@
+import { GetMetricsUseCase } from '@/domains/shortener/application/use-cases/get-metrics'
+import { PrismaLinksRepository } from 'prisma/repositories/prisma-links-repository'
+import { PrismaSharersRepository } from 'prisma/repositories/prisma-sharers-repository'
+import { prisma } from '../lib/prisma'
+
+export function makeGetMetricsUseCase() {
+  const sharersRepository = new PrismaSharersRepository(prisma)
+  const linksRepository = new PrismaLinksRepository(prisma)
+  const getMetricsUseCase = new GetMetricsUseCase(
+    sharersRepository,
+    linksRepository
+  )
+
+  return getMetricsUseCase
+}
