@@ -4,7 +4,7 @@ import { createAndAuthenticateSharer } from 'test/utils/create-and-authenticate-
 import { createLink } from 'test/utils/create-link'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
-describe('Get Link Details (E2E)', () => {
+describe('Fetch Recent Links (E2E)', () => {
   beforeAll(async () => {
     await app.ready()
   })
