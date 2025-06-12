@@ -11,6 +11,7 @@ type FetchRecentLinksUseCaseResponse = Either<
   null,
   {
     links: Link[]
+    totalCount: number
   }
 >
 
@@ -21,12 +22,19 @@ export class FetchRecentLinksUseCase {
     sharerId,
     page,
   }: FetchRecentLinksUseCaseRequest): Promise<FetchRecentLinksUseCaseResponse> {
+    let totalCount = 0
+
     const links = await this.linksRepository.findManyBySharerId(sharerId, {
       page,
     })
 
+    if (links.length > 0) {
+      totalCount = await this.linksRepository.countManyBySharerId(sharerId)
+    }
+
     return success({
       links,
+      totalCount,
     })
   }
 }

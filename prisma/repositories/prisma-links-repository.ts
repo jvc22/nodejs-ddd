@@ -47,6 +47,16 @@ export class PrismaLinksRepository implements LinksRepository {
     return links.map(PrismaLinkMapper.toDomain)
   }
 
+  async countManyBySharerId(sharerId: string) {
+    const count = await this.prisma.link.count({
+      where: {
+        sharerId: sharerId,
+      },
+    })
+
+    return count
+  }
+
   async create(link: Link) {
     const data = PrismaLinkMapper.toPrisma(link)
 

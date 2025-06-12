@@ -29,6 +29,7 @@ describe('Fetch Recent Links Use Case', () => {
 
     if (result.isSuccess()) {
       expect(result.value.links).toHaveLength(7)
+      expect(result.value.totalCount).toBe(7)
     }
   })
 

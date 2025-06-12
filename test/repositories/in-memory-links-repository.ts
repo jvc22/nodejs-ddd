@@ -34,6 +34,14 @@ export class InMemoryLinksRepository implements LinksRepository {
     return links
   }
 
+  async countManyBySharerId(sharerId: string) {
+    const count = this.items.filter(
+      item => item.sharerId.toString() === sharerId
+    ).length
+
+    return count
+  }
+
   async create(link: Link) {
     this.items.push(link)
   }

@@ -28,6 +28,8 @@ describe('Fetch Recent Links (E2E)', () => {
     expect(firstSectionResponse.statusCode).toBe(200)
     expect(firstSectionResponse.body).toHaveProperty('links')
     expect(firstSectionResponse.body.links).toHaveLength(10)
+    expect(firstSectionResponse.body).toHaveProperty('totalCount')
+    expect(firstSectionResponse.body.totalCount).toBe(12)
 
     const secondSectionResponse = await request(app.server)
       .get('/links?page=2')
@@ -37,5 +39,7 @@ describe('Fetch Recent Links (E2E)', () => {
     expect(secondSectionResponse.statusCode).toBe(200)
     expect(secondSectionResponse.body).toHaveProperty('links')
     expect(secondSectionResponse.body.links).toHaveLength(2)
+    expect(secondSectionResponse.body).toHaveProperty('totalCount')
+    expect(secondSectionResponse.body.totalCount).toBe(12)
   })
 })

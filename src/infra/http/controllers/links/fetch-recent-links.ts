@@ -16,6 +16,7 @@ export const fetchRecentLinks: FastifyPluginAsyncZod = async app => {
         response: {
           200: z.object({
             links: z.custom<LinkHTTP[]>(),
+            totalCount: z.number(),
           }),
         },
       },
@@ -31,9 +32,10 @@ export const fetchRecentLinks: FastifyPluginAsyncZod = async app => {
       })
 
       if (result.isSuccess()) {
-        return reply
-          .status(200)
-          .send({ links: result.value.links.map(LinkPresenter.toHTTP) })
+        return reply.status(200).send({
+          links: result.value.links.map(LinkPresenter.toHTTP),
+          totalCount: result.value.totalCount,
+        })
       }
     }
   )

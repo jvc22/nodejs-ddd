@@ -8,6 +8,7 @@ export interface LinksRepository {
     sharerId: string,
     params: PaginationParams
   ): Promise<Link[]>
+  countManyBySharerId(sharerId: string): Promise<number>
   create(link: Link): Promise<void>
   update(link: Link): Promise<void>
   delete(link: Link): Promise<void>
