@@ -1,6 +1,7 @@
 import { type Either, failure, success } from '@/core/either'
 import type { Link } from '../../enterprise/entities/link'
 import type { LinksRepository } from '../repositories/links-repository'
+import type { SharersRepository } from '../repositories/sharers-repository'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 type AccessLinkUseCaseRequest = {
@@ -15,7 +16,10 @@ type AccessLinkUseCaseResponse = Either<
 >
 
 export class AccessLinkUseCase {
-  constructor(private linksRepository: LinksRepository) {}
+  constructor(
+    private sharersRepository: SharersRepository,
+    private linksRepository: LinksRepository
+  ) {}
 
   async execute({
     code,
@@ -26,7 +30,17 @@ export class AccessLinkUseCase {
       return failure(new ResourceNotFoundError())
     }
 
+    const sharer = await this.sharersRepository.findById(
+      link.sharerId.toString()
+    )
+
     link.accessCount += 1
+
+    if (sharer) {
+      sharer.totalAccessCount += 1
+
+      await this.sharersRepository.update(sharer)
+    }
 
     await this.linksRepository.update(link)
 

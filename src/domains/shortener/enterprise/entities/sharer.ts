@@ -7,18 +7,20 @@ export interface SharerProps {
   name: string
   email: string
   passwordHash: Password
+  totalAccessCount: number
   createdAt: Date
   updatedAt?: Date | null
 }
 
 export class Sharer extends BaseEntity<SharerProps> {
   static create(
-    props: Optional<SharerProps, 'createdAt'>,
+    props: Optional<SharerProps, 'totalAccessCount' | 'createdAt'>,
     id?: UniqueEntityId
   ) {
     const sharer = new Sharer(
       {
         ...props,
+        totalAccessCount: props.totalAccessCount ?? 0,
         createdAt: props.createdAt ?? new Date(),
       },
       id
@@ -43,6 +45,10 @@ export class Sharer extends BaseEntity<SharerProps> {
     return this.props.passwordHash
   }
 
+  get totalAccessCount() {
+    return this.props.totalAccessCount
+  }
+
   get createdAt() {
     return this.props.createdAt
   }
@@ -53,6 +59,12 @@ export class Sharer extends BaseEntity<SharerProps> {
 
   set name(newName: string) {
     this.props.name = newName
+
+    this.touch()
+  }
+
+  set totalAccessCount(newCount: number) {
+    this.props.totalAccessCount = newCount
 
     this.touch()
   }
