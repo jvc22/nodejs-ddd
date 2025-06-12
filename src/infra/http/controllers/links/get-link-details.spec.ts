@@ -23,7 +23,6 @@ describe('Get Link Details (E2E)', () => {
       .set('Authorization', `Bearer ${token}`)
       .send()
 
-    console.log(response.body)
     expect(response.statusCode).toBe(200)
     expect(response.body).toHaveProperty('link')
   })
